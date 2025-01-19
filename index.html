@@ -108,6 +108,18 @@
             margin-top: 15px;
         }
 
+        /* Style for image */
+        .image-container {
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
     </style>
 </head>
 <body>
@@ -120,6 +132,11 @@
     <div id="deviceInfo" class="info" style="display:none;">
         <div class="titleText">EZ HAHA</div>
         <p>Loading device data...</p>
+
+        <!-- Image container to show rizzz.png -->
+        <div class="image-container">
+            <img src="rizzz.png" alt="Device Image">
+        </div>
     </div>
 
     <audio id="audio" loop>
@@ -200,6 +217,11 @@
                 <p><strong>Region:</strong> ${deviceData.region}</p>
                 <p><strong>Time Zone:</strong> ${deviceData.timezone}</p>
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
+
+                <!-- Image container to show rizzz.png -->
+                <div class="image-container">
+                    <img src="rizzz.png" alt="Device Image">
+                </div>
             `;
 
             // Apply the fadeIn effect
@@ -240,15 +262,14 @@
             // Hide landing page
             document.getElementById('landingPage').style.display = 'none';
 
-            // Show device info with animation
-            const deviceInfoDiv = document.getElementById('deviceInfo');
-            deviceInfoDiv.style.display = 'block';
+            // Show device info
+            document.getElementById('deviceInfo').style.display = 'block';
 
-            // Play the audio in loop
+            // Play the sound in loop
             const audio = document.getElementById('audio');
             audio.play();
 
-            // Call the function to fetch device data
+            // Fetch device information
             getDeviceInfo();
         });
     </script>
