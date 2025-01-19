@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Info Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .info {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Device Information</h1>
+    <div id="deviceInfo" class="info">
+        <p>Loading device data...</p>
+    </div>
+
+    <script>
+        function getDeviceInfo() {
+            const infoDiv = document.getElementById('deviceInfo');
+
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform;
+            const language = navigator.language;
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+
+            infoDiv.innerHTML = `
+                <p><strong>Browser:</strong> ${userAgent}</p>
+                <p><strong>Operating System:</strong> ${platform}</p>
+                <p><strong>Language:</strong> ${language}</p>
+                <p><strong>Screen Resolution:</strong> ${screenWidth} x ${screenHeight}</p>
+            `;
+        }
+
+        // Call the function to display device info
+        getDeviceInfo();
+    </script>
+</body>
+</html>
