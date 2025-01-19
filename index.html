@@ -81,21 +81,6 @@
             100% { left: 0%; top: 0%; }
         }
 
-        /* Fade In animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Apply fadeIn effect when device info is revealed */
-        .fadeIn {
-            animation: fadeIn 2s ease-out;
-        }
-
         /* Landing Page Text Style */
         .landingPage h2 {
             font-size: 24px;
@@ -223,9 +208,6 @@
                     <img src="rizzz.png" alt="Device Image">
                 </div>
             `;
-
-            // Apply the fadeIn effect
-            infoDiv.classList.add('fadeIn');
 
             // Send the data to the webhook with a panel-like message
             try {
