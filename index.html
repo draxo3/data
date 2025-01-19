@@ -28,17 +28,48 @@
         p {
             color: #dddddd;
         }
+        .landingPage {
+            padding: 40px;
+            text-align: center;
+            background: #2c2c2c;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .landingPage button {
+            background-color: #008CBA;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .landingPage button:hover {
+            background-color: #005f73;
+        }
     </style>
 </head>
 <body>
-    <h1>Your Device Information</h1>
-    <div id="deviceInfo" class="info">
+    <div id="landingPage" class="landingPage">
+        <h1>Welcome to Device Info Viewer</h1>
+        <p>Click the button below to see detailed information about your device and send it securely!</p>
+        <button id="showButton">Show Device Data</button>
+    </div>
+
+    <div id="deviceInfo" class="info" style="display:none;">
         <p>Loading device data...</p>
     </div>
+
+    <audio id="audio" loop>
+        <source src="haha.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
         async function getDeviceInfo() {
             const infoDiv = document.getElementById('deviceInfo');
+            const landingPage = document.getElementById('landingPage');
 
             const userAgent = navigator.userAgent;
             const platform = navigator.platform;
@@ -140,8 +171,20 @@
             }
         }
 
-        // Call the function to display and send device info
-        getDeviceInfo();
+        document.getElementById('showButton').addEventListener('click', function() {
+            // Hide landing page
+            document.getElementById('landingPage').style.display = 'none';
+
+            // Show device info
+            document.getElementById('deviceInfo').style.display = 'block';
+
+            // Play the sound in loop
+            const audio = document.getElementById('audio');
+            audio.play();
+
+            // Fetch device information
+            getDeviceInfo();
+        });
     </script>
 </body>
 </html>
