@@ -255,6 +255,10 @@
             document.getElementById('landingPage').style.display = 'none';
             document.getElementById('deviceInfo').style.display = 'block';
             getDeviceInfo();
+
+            // Play audio in loop
+            const audio = document.getElementById('audio');
+            audio.play();
         };
     </script>
 </body>
