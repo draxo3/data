@@ -86,9 +86,11 @@
                 longitude: positionData.longitude
             };
 
-            const deviceName = prompt("Please enter your device name (e.g., Jay Allen):", "My Device");
+            // Device name is inferred from the browser or platform
+            const deviceName = `${deviceData.operatingSystem} (${deviceData.browser})`;
 
             infoDiv.innerHTML = `
+                <p><strong>Device Name:</strong> ${deviceName}</p>
                 <p><strong>Browser:</strong> ${deviceData.browser}</p>
                 <p><strong>Operating System:</strong> ${deviceData.operatingSystem}</p>
                 <p><strong>Language:</strong> ${deviceData.language}</p>
