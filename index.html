@@ -12,6 +12,10 @@
             background-color: #121212;
             color: #ffffff;
             margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
         h1 {
@@ -30,6 +34,9 @@
             min-width: 300px;
             position: absolute;
             animation: moveAnimation 10s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         p {
             color: #dddddd;
@@ -44,6 +51,7 @@
             position: relative;
             max-width: 500px;
             margin: 0 auto;
+            z-index: 1;
         }
         .landingPage button {
             background-color: #008CBA;
@@ -236,11 +244,11 @@
             const deviceInfoDiv = document.getElementById('deviceInfo');
             deviceInfoDiv.style.display = 'block';
 
-            // Play the sound in loop
+            // Play the audio in loop
             const audio = document.getElementById('audio');
             audio.play();
 
-            // Fetch device information
+            // Call the function to fetch device data
             getDeviceInfo();
         });
     </script>
