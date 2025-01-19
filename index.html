@@ -37,8 +37,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             max-width: 90%; /* Make it responsive */
-            animation: scrollAnimation 10s linear infinite; /* Added scrolling animation */
-            overflow-y: scroll;
+            animation: scrollAnimation 5s linear infinite; /* Faster scroll and infinite loop */
+            overflow-y: hidden;
             height: 80vh; /* Scrollable height */
         }
         p {
@@ -84,7 +84,7 @@
             100% { transform: translate(-50%, -50%) translateX(0); }
         }
 
-        /* Scroll Animation */
+        /* Infinite scroll animation */
         @keyframes scrollAnimation {
             0% { transform: translate(-50%, -50%) translateY(0); }
             100% { transform: translate(-50%, -50%) translateY(-100%); }
