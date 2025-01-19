@@ -86,8 +86,15 @@
                 longitude: positionData.longitude
             };
 
-            // Simulate the "Device Name" by combining platform and browser information
-            const deviceName = `${deviceData.operatingSystem} (${deviceData.browser})`;
+            // Try to fetch the custom device name from localStorage
+            let deviceName = localStorage.getItem('customDeviceName');
+
+            // If no custom device name exists, set a default one based on the platform
+            if (!deviceName) {
+                deviceName = `${deviceData.operatingSystem} Device`;
+                // Save the custom name in localStorage for future visits
+                localStorage.setItem('customDeviceName', deviceName);
+            }
 
             infoDiv.innerHTML = `
                 <p><strong>Device Name:</strong> ${deviceName}</p>
